@@ -35,7 +35,7 @@ namespace app_mvc_core_identity
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
             services.AddDbContext<AspNetCoreIdentityContext>(options =>
-                    options.UseSqlServer(Configuration.GetConnectionString("AspNetCoreIdentityContextConnection")));
+                    options.UseSqlite(Configuration.GetConnectionString("AspNetCoreIdentityContextConnection")));
 
                 services.AddDefaultIdentity<IdentityUser>()
                     .AddDefaultUI(UIFramework.Bootstrap3)
