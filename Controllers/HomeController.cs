@@ -5,16 +5,20 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using app_mvc_core_identity.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace app_mvc_core_identity.Controllers
 {
+     [Authorize]
     public class HomeController : Controller
     {
+        [AllowAnonymous]
         public IActionResult Index()
         {
             return View();
         }
 
+        // [Authorize]
         public IActionResult Privacy()
         {
             return View();
