@@ -38,6 +38,7 @@ namespace app_mvc_core_identity
                     options.UseSqlite(Configuration.GetConnectionString("AspNetCoreIdentityContextConnection")));
 
                 services.AddDefaultIdentity<IdentityUser>()
+                    .AddRoles<IdentityRole>()
                     .AddDefaultUI(UIFramework.Bootstrap4)
                     .AddEntityFrameworkStores<AspNetCoreIdentityContext>();
 
