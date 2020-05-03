@@ -37,11 +37,15 @@ namespace app_mvc_core_identity
             services.AddDbContext<AspNetCoreIdentityContext>(options =>
                     options.UseSqlite(Configuration.GetConnectionString("AspNetCoreIdentityContextConnection")));
 
-                services.AddDefaultIdentity<IdentityUser>()
-                    .AddRoles<IdentityRole>()
-                    .AddDefaultUI(UIFramework.Bootstrap4)
-                    .AddEntityFrameworkStores<AspNetCoreIdentityContext>();
+            services.AddDefaultIdentity<IdentityUser>()
+                .AddRoles<IdentityRole>()
+                .AddDefaultUI(UIFramework.Bootstrap4)
+                .AddEntityFrameworkStores<AspNetCoreIdentityContext>();
 
+            services.AddAuthorization(options =>
+            {
+                options.AddPolicy("PodeExcluir", policy => policy.RequireClaim("PodeExcluir"));
+            });
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
         }

@@ -26,7 +26,15 @@ namespace app_mvc_core_identity.Controllers
         [Authorize(Roles = "Admin, Gestor")]
         public IActionResult Secret()
         {
+            ViewData["Title"] = "Secret";
             return View();
+        }
+
+        [Authorize(Policy = "PodeExcluir")]
+        public IActionResult SecretClaim()
+        {
+            ViewData["Title"] = "Secret Claim";
+            return View("Secret");
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
