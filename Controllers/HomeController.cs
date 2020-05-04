@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using app_mvc_core_identity.Models;
 using Microsoft.AspNetCore.Authorization;
+using app_mvc_core_identity.Extensions;
 
 namespace app_mvc_core_identity.Controllers
 {
@@ -41,6 +42,13 @@ namespace app_mvc_core_identity.Controllers
         public IActionResult SecretClaimPodeEscreverLer()
         {
             ViewData["Title"] = "Secret Claim Escrever e Ler";
+            return View("Secret");
+        }
+
+        [ClaimAuthorize("Produtos", "Ler")]
+        public IActionResult CaimsCustom()
+        {
+            ViewData["Title"] = "CaimsCustom";
             return View("Secret");
         }
 
