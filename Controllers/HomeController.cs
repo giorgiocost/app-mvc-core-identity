@@ -37,6 +37,13 @@ namespace app_mvc_core_identity.Controllers
             return View("Secret");
         }
 
+        [Authorize(Policy = "PodeEscrever")]
+        public IActionResult SecretClaimPodeEscreverLer()
+        {
+            ViewData["Title"] = "Secret Claim Escrever e Ler";
+            return View("Secret");
+        }
+
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {
