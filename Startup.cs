@@ -9,12 +9,18 @@ namespace app_mvc_core_identity
 {
     public class Startup
     {
-        public Startup(IConfiguration configuration)
+        public IConfiguration Configuration { get; }
+        public Startup(IHostingEnvironment hostingEnvironment)
         {
-            Configuration = configuration;
+            var builder = new ConfigurationBuilder()
+            .SetBasePath(hostingEnvironment.ContentRootPath)
+            .AddJsonFile("appsettings.json", true,true)
+            .AddJsonFile("appsettings."+hostingEnvironment.EnvironmentName+".json", true,true)
+            .AddEnvironmentVariables();
+
+            Configuration = builder.Build();
         }
 
-        public IConfiguration Configuration { get; }
         
         public void ConfigureServices(IServiceCollection services)
         {
