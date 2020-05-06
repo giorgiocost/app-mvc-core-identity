@@ -3,8 +3,10 @@
   <PropertyGroup>
     <TargetFramework>netcoreapp2.2</TargetFramework>
     <AspNetCoreHostingModel>InProcess</AspNetCoreHostingModel>
-    <RootNamespace>app_mvc_core_identity</RootNamespace>
+    <RootNamespace>app_mvc_core_identity</RootNamespace>    
+    <UserSecretsId>app_mvc_core_identity-ce345b64-19cf-4972-b34f-d16f2e7976ed</UserSecretsId>
   </PropertyGroup>
+
 
 
   <ItemGroup>
