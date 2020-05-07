@@ -10,7 +10,7 @@
              "request": "launch",
              "preLaunchTask": "build",
              // If you have changed target frameworks, make sure to update the program path.
-             "program": "${workspaceFolder}/bin/Debug/netcoreapp2.1/app-mvc-core.dll",
+             "program": "${workspaceFolder}/bin/Debug/netcoreapp2.2/app-mvc-core-identity.dll",
              "args": [],
              "cwd": "${workspaceFolder}",
              "stopAtEntry": false,

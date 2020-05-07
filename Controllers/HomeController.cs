@@ -10,7 +10,7 @@ using app_mvc_core_identity.Extensions;
 
 namespace app_mvc_core_identity.Controllers
 {
-     [Authorize]
+    [Authorize]
     public class HomeController : Controller
     {
         [AllowAnonymous]
@@ -21,6 +21,7 @@ namespace app_mvc_core_identity.Controllers
 
         public IActionResult Privacy()
         {
+            throw new Exception("Error");
             return View();
         }
 
@@ -45,6 +46,13 @@ namespace app_mvc_core_identity.Controllers
             return View("Secret");
         }
 
+        [Authorize(Roles = "Funcionario")]
+        public IActionResult AcessoNegado()
+        {
+            ViewData["Title"] = "Acesso Negado";
+            return View("Secret");
+        }
+
         [ClaimAuthorize("Produtos", "Ler")]
         public IActionResult CaimsCustom()
         {
@@ -52,10 +60,39 @@ namespace app_mvc_core_identity.Controllers
             return View("Secret");
         }
 
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
+        [Route("erro/{id:length(3,3)}")]
+        public IActionResult Error(int id)
         {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+            var modelErro = new ErrorViewModel();
+            ErrorStatusCode(id, modelErro);
+            return View("Error", modelErro);
         }
+
+        private void ErrorStatusCode(int id, ErrorViewModel modelErro)
+        {
+            if (id == 500)
+            {
+                modelErro.Mensagem = "Ocorreu um erro! Tente novamente mais tarde ou contate nosso suporte";
+                modelErro.Titulo = "Ocorreu um erro!";
+                modelErro.ErroCode = id;
+            }
+            else if (id == 404)
+            {
+                modelErro.Mensagem = "A página que você esta procurando não existe !";
+                modelErro.Titulo = "Ops! Página não encontrada";
+                modelErro.ErroCode = id;
+            }
+            else if (id == 403)
+            {
+                modelErro.Mensagem = "Você não tem permissão para fazer isso !";
+                modelErro.Titulo = "Acesso negado";
+                modelErro.ErroCode = id;
+            }
+            else
+            {
+                StatusCode(404);
+            }
+        }
+
     }
 }
