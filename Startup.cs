@@ -1,4 +1,6 @@
 ﻿using app_mvc_core_identity.Config;
+using KissLog.Apis.v1.Listeners;
+using KissLog.AspNetCore;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
@@ -51,6 +53,13 @@ namespace app_mvc_core_identity
                 app.UseStatusCodePagesWithRedirects("/erro/{0}");
                 app.UseHsts();
             }
+
+            IApplicationBuilder applicationBuilder = app.UseKissLogMiddleware(options => {
+                options.Listeners.Add(new KissLogApiListener(new KissLog.Apis.v1.Auth.Application(
+                    Configuration["KissLog.OrganizationId"],
+                    Configuration["KissLog.ApplicationId"])
+                ));
+            });
 
             app.UseHttpsRedirection();
             app.UseStaticFiles();
