@@ -1,4 +1,4 @@
-# App Mvc Core Identity
+# App Mvc Core Identity - [Estudo]
 
 ## Ferramentas utilizadas 
 - Git
