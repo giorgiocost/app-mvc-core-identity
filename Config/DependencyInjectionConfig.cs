@@ -17,6 +17,8 @@ namespace app_mvc_core_identity.Config
             {
                 return Logger.Factory.Get();
             });
+
+            services.AddScoped<AuditoriaFilter>();
             return services;
         }
     }
